@@ -21,7 +21,7 @@ int lastValue;
 volatile int val;
 volatile int timeNow;
 int threshold = 1250;
-bool buttonPressed = false;
+//bool buttonPressed = false;
 
 
 void initADC(){
@@ -155,4 +155,9 @@ printf("Crossing: %d\n", crossings);
 float val = (float)crossings/(2.0* endTime);
 crossings = 0;
 return val;
+}
+
+void resetSampling(){
+    crossings = 0;
+    count = 0;
 }

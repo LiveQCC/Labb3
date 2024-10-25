@@ -3,6 +3,9 @@
 
 #include <stdint.h>
 
+int isButtonPressed(); 
+
+
 /* initialises the LED pin */
 void initPins();
 

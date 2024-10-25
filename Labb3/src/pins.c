@@ -5,9 +5,11 @@
 #define LED_PIN_1 GPIO_NUM_12
 #define LED_PIN_2 GPIO_NUM_13
 #define BUTTON_PIN GPIO_NUM_18
-bool buttonPressed = false;
+//bool buttonPressed = false;
 
-
+int isButtonPressed(){ 
+    return gpio_get_level(BUTTON_PIN) == 0;
+}
 
 void initPins() {
     gpio_config_t config;
@@ -20,6 +22,8 @@ void initPins() {
     config.pin_bit_mask = (u_int64_t)1 << LED_PIN_2;
     gpio_config(&config);
     config.pin_bit_mask = (u_int64_t)1 << BUTTON_PIN;
+    config.pull_down_en = 0;
+config.intr_type = GPIO_INTR_NEGEDGE;
     config.mode = GPIO_MODE_INPUT;
     config.pull_up_en = 1;
     gpio_config(&config);
