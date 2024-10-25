@@ -16,8 +16,7 @@
 static volatile uint64_t lastPush = -PUSH_TIME_US;
 
 // Frequencies of open strings in standard tuning (E2, A2, D3, G3, B3, E4)
-float guitarFrequencies[] = {329.63, 246.94, 196.00, 146.83, 110.00, 82.41}; // Starting from high E (thinnest string)
-
+ float guitarFrequencies[] = {82.41, 110.0, 146.83, 196.0, 246.94, 329.63};
 // Global variables
 int currentString = 0;  // Track the current string (0 = high E)
 bool buttonPressed = false;
@@ -90,13 +89,16 @@ void tuneString(float targetFreq) {
 
     if (diff > TARGET_TOLERANCE) {
         // Detected frequency is higher than the target
+        printf("Detected frequency is higher than the target\n");
         setLEDPin(0);  // Turn off LED A
         setLEDPin2(1); // Turn on LED B (indicating frequency is too high)
     } else if (diff < -TARGET_TOLERANCE) {
+        printf("Detected frequency is lower than the target\n");
         // Detected frequency is lower than the target
         setLEDPin(1);  // Turn on LED A (indicating frequency is too low)
         setLEDPin2(0); // Turn off LED B
     } else {
+        printf("Detected frequency is within tolerance\n");
         // Frequency is within ±TARGET_TOLERANCE of the target
         setLEDPin(1);  // Turn on both LEDs (indicating correct tuning)
         setLEDPin2(1);
